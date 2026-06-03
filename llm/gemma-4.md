@@ -16,10 +16,10 @@
 - PLE 이점
     - 지식 저장소의 분리: Attention은 문맥 파악에 집중하고, PLE는 고정된 사실이나 지식을 저장하는 방향으로 학습
     - Diversed Feature Extraction: 동일한 입력에 대해 서로 다른 관점의 특징 추출
-    - Decoder Block Layer 수를 줄이는 대신 FFN Layer에 Elementwise Mul 연산을 추가해서 Processing 부담을 줄임
+    - Decoder Block Layer 수를 줄이는 대신 FFN Layer에 Element-wise multiplication 연산을 추가해서 Processing 부담을 줄임
 - 위 장점만 봤을 때는 큰 모델에서도 적용하지 않을 이유가 없어보이는데?
     - 큰 모델에서는 Decode Stage에서는 이미 IO Bound에 걸려있으므로 Processing Cycle을 줄이는게 크게 의미 없음.
-    - 또한, Parameter Efficiencty 관점에서 MoE를 사용 중.
+    - 또한, Parameter Efficiency 관점에서 MoE를 사용 중.
 
 ![alt text](../attachment/image-3.png)
 ![alt text](../attachment/image-4.png)
