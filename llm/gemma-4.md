@@ -19,7 +19,7 @@
     - Decoder Block Layer 수를 줄이는 대신 FFN Layer에 Element-wise multiplication 연산을 추가해서 Processing 부담을 줄임
 - 위 장점만 봤을 때는 큰 모델에서도 적용하지 않을 이유가 없어보이는데?
     - 큰 모델에서는 Decode Stage에서는 이미 IO Bound에 걸려있으므로 Processing Cycle을 줄이는게 크게 의미 없음.
-    - 또한, Parameter Efficiency 관점에서 MoE를 사용 중.
+    - 대형 모델에서는 이미 충분히 큰 파라미터 수를 가지고 있으므로 PLE보다는 MoE로 연산량은 줄이되 Dense 모델에 근접한 성능을 내는 것이 나음.
 
 ![alt text](../attachment/image-3.png)
 ![alt text](../attachment/image-4.png)
