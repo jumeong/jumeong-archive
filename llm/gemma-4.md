@@ -59,6 +59,54 @@ model.generate()
               └── _speculative_sampling()           # reject sampling으로 수락/거부
 ```
 
+## 성능 (Decoding Tput)
+### Light User 관점
+- https://developer-blogs.nvidia.com/wp-content/uploads/2025/09/speculative-decoding-on-off.gif
+
+### Benchmark
+- ![alt text](../attachment/image-8.png)
+- 출처: https://www.reddit.com/r/LocalLLaMA/comments/1sjct6a/speculative_decoding_works_great_for_gemma_4_31b/?solution=281a0ed603877bc8281a0ed603877bc8&js_challenge=1&token=7afd7253fec22262ff1c52b1703fe9ec7fe009426c8f7f6113d08be287d18ff1&jsc_orig_r=
+
+### Self Experiment
+- Tested on H100
+
+#### Prompt-heavy: 8000 input / 1000 output
+| 지표 (Metric) | Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8 | google/gemma-4-26B-A4B-it wo/ SD | google/gemma-4-26B-A4B-it w/ SD |
+| :--- | :--- | :--- | :--- |
+| **Successful requests** | 16 | 16 | 16 |
+| **Failed requests** | 0 | 0 | 0 |
+| **Maximum request concurrency** | 1 | 1 | 1 |
+| **Benchmark duration (s)** | 95.41 | 106.69 | 121.42 |
+| **Total input tokens** | 128,000 | 128,000 | 128,000 |
+| **Total generated tokens** | 16,000 | 16,000 | 16,000 |
+| **Request throughput (req/s)** | 0.17 | 0.15 | 0.13 |
+| **Output token throughput (tok/s)** | 167.69 | 149.97 | 131.78 |
+| **Peak output token throughput (tok/s)** | 175.00 | 163.00 | 50.00 |
+| **Peak concurrent requests** | 2.00 | 2.00 | 2.00 |
+| **Total token throughput (tok/s)** | 1509.20 | 1349.69 | 1185.98 |
+| **Mean TTFT (ms)** | 219.48 | 437.15 | 490.21 |
+| **Median TTFT (ms)** | 261.13 | 430.10 | 482.46 |
+| **P99 TTFT (ms)** | 315.53 | 592.80 | 643.24 |
+| **Mean TPOT (ms)** | 5.75 | 6.24 | 7.10 |
+| **Median TPOT (ms)** | 5.76 | 6.23 | 5.94 |
+| **P99 TPOT (ms)** | 5.77 | 6.27 | 19.86 |
+| **Mean ITL (ms)** | 5.75 | 6.25 | 20.89 |
+| **Median ITL (ms)** | 5.76 | 6.26 | 20.94 |
+| **P99 ITL (ms)** | 6.18 | 6.45 | 22.19 |
+| **SD Acceptance rate (%)** | - | - | 48.62 |
+| **SD Acceptance length** | - | - | 2.94 |
+| **SD Drafts** | - | - | 5435 |
+| **SD Draft tokens** | - | - | 21740 |
+| **SD Accepted tokens** | - | - | 10569 |
+| **SD Position 0 acceptance (%)** | - | - | 62.85 |
+| **SD Position 1 acceptance (%)** | - | - | 52.51 |
+| **SD Position 2 acceptance (%)** | - | - | 42.32 |
+| **SD Position 3 acceptance (%)** | - | - | 36.78 |
+
+
+#### Decode-heavy: 1000 input / 8000 output
+#### Balanced: 1000 input / 1000 output
+
 ## 이슈
 https://news.hada.io/topic?id=29219
 
