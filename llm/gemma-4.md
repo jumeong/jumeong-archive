@@ -148,6 +148,41 @@ model.generate()
     - Balanced의 경우, 입출력 Total 2천 토큰은 문장 전환이나 새로운 정보가 나올 확률이 높아 엔트로피가 상대적으로 높을 수 있음.
 
 #### Balanced: 1000 input / 1000 output
+| 지표 (Metric) | Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8 | google/gemma-4-26B-A4B-it wo/ SD | google/gemma-4-26B-A4B-it w/ SD |
+| :--- | :--- | :--- | :--- |
+| **Successful requests** | 16 | 16 | 16 |
+| **Failed requests** | 0 | 0 | 0 |
+| **Maximum request concurrency** | 1 | 1 | 1 |
+| **Benchmark duration (s)** | 91.14 | 89.48 | 70.38 |
+| **Total input tokens** | 16,000 | 16,000 | 16,000 |
+| **Total generated tokens** | 16,000 | 16,000 | 16,000 |
+| **Request throughput (req/s)** | 0.18 | 0.18 | 0.23 |
+| **Output token throughput (tok/s)** | 175.56 | 178.82 | 227.33 |
+| **Peak output token throughput (tok/s)** | 181.00 | 190.00 | 83.00 |
+| **Peak concurrent requests** | 2.00 | 2.00 | 2.00 |
+| **Total token throughput (tok/s)** | 351.11 | 357.63 | 454.65 |
+| **Mean TTFT (ms)** | 93.50 | 258.04 | 394.95 |
+| **Median TTFT (ms)** | 114.15 | 69.64 | 85.01 |
+| **P99 TTFT (ms)** | 134.28 | 2633.03 | 4295.53 |
+| **Mean TPOT (ms)** | 5.61 | 5.34 | 4.01 |
+| **Median TPOT (ms)** | 5.57 | 5.33 | 3.36 |
+| **P99 TPOT (ms)** | 5.91 | 5.36 | 9.06 |
+| **Mean ITL (ms)** | 5.61 | 5.34 | 12.60 |
+| **Median ITL (ms)** | 5.57 | 5.34 | 12.55 |
+| **P99 ITL (ms)** | 6.41 | 5.56 | 13.99 |
+| **SD Acceptance rate (%)** | - | - | 53.72 |
+| **SD Acceptance length** | - | - | 3.15 |
+| **SD Drafts** | - | - | 5085 |
+| **SD Draft tokens** | - | - | 20340 |
+| **SD Accepted tokens** | - | - | 10927 |
+| **SD Position 0 acceptance (%)** | - | - | 67.59 |
+| **SD Position 1 acceptance (%)** | - | - | 57.01 |
+| **SD Position 2 acceptance (%)** | - | - | 45.39 |
+| **SD Position 3 acceptance (%)** | - | - | 44.90 |
+
+- Peak output token throughput 계산이 SD 적용이 제대로 되지 않은 듯 → Peak가 평균치보다 낮으므로 이상.
+- SD로 인해, 평균 output token tp는 gemma w/ SD가 우세.
+- position 별로 뒤로 갈수록 accpetance가 낮은 것은 자연스러운 현상임.
 
 ## 이슈
 https://news.hada.io/topic?id=29219
