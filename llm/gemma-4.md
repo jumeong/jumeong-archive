@@ -103,7 +103,11 @@ model.generate()
 | **SD Position 2 acceptance (%)** | - | - | 42.32 |
 | **SD Position 3 acceptance (%)** | - | - | 36.78 |
 
-
+- SD 켠게 더 안좋음 WHY??????
+    - Draft Model이 Long Context 처리 효율이 떨어지므로 8k 입력에 대해서는 Acceptance Rate이 떨어지는 것으로 보임.
+    - 그러므로, SD 없이 Autoregressive하게 동작한 모델이 나은 수준으로 TP가 저하.
+    - 추가적으로, Balance 시나리오에 비해 예측이 틀렸을 때 가지는 penalty가 더 큼 (input tokens가 더 길어서 decoding 단계에서 소요되는 시간이 더 길기 때문)
+    
 #### Decode-heavy: 1000 input / 8000 output
 #### Balanced: 1000 input / 1000 output
 
