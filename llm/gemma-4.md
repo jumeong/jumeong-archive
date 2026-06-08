@@ -107,8 +107,46 @@ model.generate()
     - Draft Model이 Long Context 처리 효율이 떨어지므로 8k 입력에 대해서는 Acceptance Rate이 떨어지는 것으로 보임.
     - 그러므로, SD 없이 Autoregressive하게 동작한 모델이 나은 수준으로 TP가 저하.
     - 추가적으로, Balance 시나리오에 비해 예측이 틀렸을 때 가지는 penalty가 더 큼 (input tokens가 더 길어서 decoding 단계에서 소요되는 시간이 더 길기 때문)
-    
+
 #### Decode-heavy: 1000 input / 8000 output
+| 지표 (Metric) | Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8 | google/gemma-4-26B-A4B-it wo/ SD | google/gemma-4-26B-A4B-it w/ SD |
+| :--- | :--- | :--- | :--- |
+| **Successful requests** | 16 | 16 | 16 |
+| **Failed requests** | 0 | 0 | 0 |
+| **Maximum request concurrency** | 1 | 1 | 1 |
+| **Benchmark duration (s)** | 727.30 | 742.57 | 515.01 |
+| **Total input tokens** | 16,000 | 16,000 | 16,000 |
+| **Total generated tokens** | 128,000 | 128,000 | 128,000 |
+| **Request throughput (req/s)** | 0.02 | 0.02 | 0.03 |
+| **Output token throughput (tok/s)** | 175.99 | 172.37 | 248.54 |
+| **Peak output token throughput (tok/s)** | 181.00 | 190.00 | 86.00 |
+| **Peak concurrent requests** | 2.00 | 2.00 | 2.00 |
+| **Total token throughput (tok/s)** | 197.99 | 193.92 | 279.60 |
+| **Mean TTFT (ms)** | 65.09 | 39.53 | 52.74 |
+| **Median TTFT (ms)** | 66.81 | 39.99 | 51.68 |
+| **P99 TTFT (ms)** | 73.15 | 43.30 | 72.59 |
+| **Mean TPOT (ms)** | 5.67 | 5.80 | 4.02 |
+| **Median TPOT (ms)** | 5.67 | 5.79 | 3.47 |
+| **P99 TPOT (ms)** | 5.68 | 5.82 | 6.52 |
+| **Mean ITL (ms)** | 5.67 | 5.80 | 16.31 |
+| **Median ITL (ms)** | 5.68 | 5.80 | 16.21 |
+| **P99 ITL (ms)** | 5.96 | 6.36 | 21.97 |
+| **SD Acceptance rate (%)** | - | - | 76.55 |
+| **SD Acceptance length** | - | - | 4.06 |
+| **SD Drafts** | - | - | 31515 |
+| **SD Draft tokens** | - | - | 126060 |
+| **SD Accepted tokens** | - | - | 96493 |
+| **SD Position 0 acceptance (%)** | - | - | 85.69 |
+| **SD Position 1 acceptance (%)** | - | - | 78.32 |
+| **SD Position 2 acceptance (%)** | - | - | 71.49 |
+| **SD Position 3 acceptance (%)** | - | - | 70.69 |
+
+- 다른 케이스에 비해 Decode-heavy 케이스의 Acceptance rate이 평균적으로 높게 나오는데 왜일까?
+    - 다른 두 케이스의 Acceptance rate는 약 50%이고 해당 케이스는 약 70~80%
+    - 먼저, Prompt-Heavy의 경우, Draft Model에게는 긴 문맥일 수 있음.
+    - Decode-Heavy에서도 input token과 output token 합이 8k를 넘어가면 똑같은 것 아닌지? => 남이 만든 문맥 vs. 스스로 만든 컨텍스트. 후자가 더 예측하기 쉬울 것.
+    - Balanced의 경우, 입출력 Total 2천 토큰은 문장 전환이나 새로운 정보가 나올 확률이 높아 엔트로피가 상대적으로 높을 수 있음.
+
 #### Balanced: 1000 input / 1000 output
 
 ## 이슈
