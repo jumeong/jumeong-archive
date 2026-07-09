@@ -41,8 +41,8 @@
 ---
 
 ## 3. Hopper vs TPU v4 시나리오 비교
-두 하드웨어의 전체 병렬 처리량을 비교한다.  
-(Hopper 132개 SM: 135,168 MACs/Cycle vs TPU 8개 MXU: 131,072 MACs/Cycle)
+두 하드웨어의 전체 병렬 처리량과 구조적 유연성을 비교한다. Hopper H100이 TPU v4보다 세대가 최신인 만큼 원초적인 체급(Peak 처리량) 자체가 약 4배 이상 크다는 점을 먼저 인지해야 한다.
+(Hopper 풀칩: 540,672 MACs/Cycle vs TPU v4 풀칩: 131,072 MACs/Cycle)
 
 ### 3.1. Hopper가 유리한 시나리오: 불규칙하고 작은 GEMM 다수 발생 (예: MoE 추론)
 
@@ -63,14 +63,15 @@ MoE(Mixture of Experts) 추론에서 Router가 토큰을 8개의 Expert로 분�
 | 항목 | TPU v4 풀칩 (8개 MXU) | Hopper 풀칩 (132개 SM) |
 |---|---|---|
 | **실제 유효 연산량** | 약 1,074만 MACs (M 총합 656) | 약 1,074만 MACs (M 총합 656) |
-| **이상적인 순수 계산** | 약 80 Cycles | 약 80 Cycles |
+| **이상적인 순수 계산** | 약 82 Cycles (1,074만 ÷ 13.1만) | **약 20 Cycles** (1,074만 ÷ 54.1만) |
 | **TPU (병렬) 소요 Cycle** | **약 459 Cycles**<br>(가장 긴 M=205 동기화 + Fill/Drain 254) | 해당 없음 |
 | **TPU (직렬) 소요 Cycle** | **약 2,688 Cycles**<br>(M=656 순수 연산 + Fill/Drain 8회 누적) | 해당 없음 |
-| **Hopper 소요 Cycle** | 해당 없음 | **약 80 Cycles + α**<br>(132개 SM 분산, 패딩 및 Pipeline 지연 거의 없음) |
+| **Hopper 소요 Cycle** | 해당 없음 | **약 20 Cycles + α**<br>(132개 SM 분산, 패딩 및 Pipeline 지연 거의 없음) |
 
 * **TPU에게 불리한 점 (SIMD 제약과 Padding Overhead):** TPU v4 칩 내부의 8개 MXU는 완전히 독립적이지 않으며, 4개씩 코어(TensorCore)에 묶여 동일한 명령어 스트림(SIMD/VLIW)을 공유한다. 이로 인해 8개의 불규칙한 Expert 연산을 처리할 때 구조적인 비효율이 발생한다.
     * **병렬 처리 시 (Padding Overhead):** 8개의 MXU에서 동시에 연산을 돌리면 Fill/Drain Overhead(254 Cycle)는 1번만 감당하면 된다. 하지만 SIMD 구조상 가장 긴 작업(M=205)의 길이에 맞춰 나머지 짧은 작업들(M=11, 12 등)을 억지로 늘려야 한다. 즉, M=205가 끝날 때까지 빈 공간을 모두 0으로 채워야(Zero-padding) 하므로, 불합리한 수준의 연산 Cycle 낭비(Underutilization)가 발생한다.
     * **직렬 처리 시 (Pipeline Overhead 누적):** 위와 같은 패딩 낭비를 피하기 위해 어쩔 수 없이 각 Expert를 순서대로 1개씩 연산하게 되면, 이번에는 매 작업마다 거대한 Array를 비우고 채우는 Fill/Drain Overhead(254 Cycle)가 8번 연속으로 누적되어 전체 소요 Cycle이 2,000 이상으로 폭증하게 된다.
-* **Hopper에게 유리한 점 (Warp Scheduler 유연성):** Hopper의 132개 SM은 각각 독자적인 Warp Scheduler를 가진 완전히 독립적인 유닛이다. 따라서 8개의 Expert 연산을 16~17개의 SM 그룹으로 자유롭게 쪼개어 완벽하게 "동시 병렬 실행"이 가능하다. 
-    * M=11짜리 작업이 끝나면 해당 SM들은 즉시 다음 작업을 수행하거나 다른 곳에 투입될 수 있으며, 가장 긴 작업(M=205)의 속도에 억지로 맞출 필요가 전혀 없다.
-    * Tensor Core는 단위(16x8x32)가 작아 자잘한 연산에도 패딩 낭비가 거의 없고 Pipeline 지연도 없다. 덕분에 칩 전체 자원을 100% 가깝게 활용하며 8개의 불규칙한 GEMM을 수행한다. MoE 추론에서 Hopper가 TPU보다 유리한 이유이다.
+* **Hopper에게 유리한 점 (압도적 체급 + Warp Scheduler 유연성):**
+    * **원초적 처리량 우위:** 앞서 언급했듯 132개 SM(528개 Tensor Core)에서 뿜어져 나오는 540,672 MACs/Cycle이라는 체급 덕분에, 이상적인 상황에서조차 TPU(82 Cycle)보다 4배 빠른 20 Cycle 만에 연산을 끝낼 수 있다.
+    * **MIMD 구조의 완벽한 유연성:** Hopper의 132개 SM은 각각 독자적인 Warp Scheduler를 가진 완전히 독립적인 유닛이다. 따라서 8개의 Expert 연산을 16~17개의 SM 그룹으로 자유롭게 쪼개어 완벽하게 "동시 병렬 실행"이 가능하다. M=11짜리 작업이 끝나면 해당 SM들은 즉시 다음 작업을 수행할 수 있으며, M=205 작업의 속도에 억지로 맞출 필요가 없다.
+    * **결론:** Hopper는 Tensor Core 단위가 작아 불규칙한 연산에도 패딩 낭비가 없고 Pipeline 지연도 없다. 결과적으로 '체급의 4배 우위'와 '구조적 효율성의 우위(TPU의 459 Cycle 낭비 방어)'가 강력한 시너지를 내어 MoE 추론 환경에서 TPU를 압도하게 된다.
