@@ -1,4 +1,9 @@
-- \<think\>: Marks the beginning of the model's private reasoning trace.
-- \</think\>: Marks the end of the reasoning block.
+- **Thinking vs. Reasoning**: 실무 및 LLM 도메인에서는 사실상 거의 같은 대상을 가리키며 혼용됨 (Reasoning Model = Thinking Model). 굳이 구분하자면 Reasoning은 목표(추론 능력), Thinking은 이를 달성하기 위한 수단(내부 사고 및 토큰 생성 과정)의 뉘앙스를 가짐.
+- `<think>`: Marks the beginning of the model's private reasoning trace.
+- `</think>`: Marks the end of the reasoning block.
 - Thinking Model이라고 해서 Non-thinking Model과 아키텍처 관점에서 다른 건 아님.
-최종 답변을 하기 전에 \<think\> 섹션 안에서 충분히 혼잣말을 하며 논리를 빌드업하도록 훈련된 모델
+- 최종 답변을 하기 전에 `<think>` 섹션 안에서 충분히 혼잣말을 하며 논리를 빌드업하도록 훈련된 모델.
+- **`<think>` 영역의 사용자 노출 여부**:
+  - `<think> ... </think>` 사이의 사고 과정(Reasoning trace)은 서빙 프레임워크(vLLM, SGLang, Ollama 등)나 프론트엔드 엔진/UI 구현에 따라 유저에게 노출될 수도 있고 숨겨질 수도 있음.
+  - **API/백엔드**: 별도의 `reasoning_content` 필드로 분리하여 반환하거나, 옵션에 따라 reasoning 토큰을 완전히 제거(strip)하고 최종 답변만 클라이언트에 전달 가능.
+  - **프론트엔드 UI**: 실시간 스트리밍 시 접이식 UI(Accordion/Collapse, "생각하는 중...")로 묶어두고 사용자가 클릭할 때만 펼쳐볼 수 있게 처리하는 것이 일반적임.
