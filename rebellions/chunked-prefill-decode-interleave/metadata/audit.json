@@ -1,0 +1,169 @@
+{
+  "runs": [
+    {
+      "experiment": "injection-1024-seed0",
+      "policy": "none",
+      "requests": 3,
+      "tokens": 1088,
+      "max_client_lag_ms": 0.7804338820278645,
+      "duration_s": 26.140657640993595,
+      "compilation_during_measurement": false
+    },
+    {
+      "experiment": "injection-1024-seed0",
+      "policy": "fixed",
+      "requests": 3,
+      "tokens": 1088,
+      "max_client_lag_ms": 0.8340892381966114,
+      "duration_s": 26.395253797993064,
+      "compilation_during_measurement": false
+    },
+    {
+      "experiment": "injection-1024-seed1",
+      "policy": "none",
+      "requests": 3,
+      "tokens": 1088,
+      "max_client_lag_ms": 0.9716460481286049,
+      "duration_s": 23.10508945211768,
+      "compilation_during_measurement": false
+    },
+    {
+      "experiment": "injection-1024-seed1",
+      "policy": "fixed",
+      "requests": 3,
+      "tokens": 1088,
+      "max_client_lag_ms": 0.8088760077953339,
+      "duration_s": 22.452197785954922,
+      "compilation_during_measurement": false
+    },
+    {
+      "experiment": "injection-1024-seed2",
+      "policy": "none",
+      "requests": 3,
+      "tokens": 1088,
+      "max_client_lag_ms": 0.920918770134449,
+      "duration_s": 25.99257189920172,
+      "compilation_during_measurement": false
+    },
+    {
+      "experiment": "injection-1024-seed2",
+      "policy": "fixed",
+      "requests": 3,
+      "tokens": 1088,
+      "max_client_lag_ms": 1.9971812143921852,
+      "duration_s": 26.79121882794425,
+      "compilation_during_measurement": false
+    },
+    {
+      "experiment": "injection-2048-seed0",
+      "policy": "none",
+      "requests": 3,
+      "tokens": 1088,
+      "max_client_lag_ms": 0.940052792429924,
+      "duration_s": 26.788623763248324,
+      "compilation_during_measurement": false
+    },
+    {
+      "experiment": "injection-2048-seed0",
+      "policy": "fixed",
+      "requests": 3,
+      "tokens": 1088,
+      "max_client_lag_ms": 1.0767411440610886,
+      "duration_s": 27.27246928308159,
+      "compilation_during_measurement": false
+    },
+    {
+      "experiment": "injection-2048-seed1",
+      "policy": "none",
+      "requests": 3,
+      "tokens": 1088,
+      "max_client_lag_ms": 0.7552667520940304,
+      "duration_s": 26.020632866304368,
+      "compilation_during_measurement": false
+    },
+    {
+      "experiment": "injection-2048-seed1",
+      "policy": "fixed",
+      "requests": 3,
+      "tokens": 1088,
+      "max_client_lag_ms": 1.8706168048083782,
+      "duration_s": 23.01973213115707,
+      "compilation_during_measurement": false
+    },
+    {
+      "experiment": "injection-2048-seed2",
+      "policy": "none",
+      "requests": 3,
+      "tokens": 1088,
+      "max_client_lag_ms": 1.141080167144537,
+      "duration_s": 26.514653861988336,
+      "compilation_during_measurement": false
+    },
+    {
+      "experiment": "injection-2048-seed2",
+      "policy": "fixed",
+      "requests": 3,
+      "tokens": 1088,
+      "max_client_lag_ms": 2.436866983771324,
+      "duration_s": 27.15407836996019,
+      "compilation_during_measurement": false
+    },
+    {
+      "experiment": "injection-3072-seed0",
+      "policy": "none",
+      "requests": 3,
+      "tokens": 1088,
+      "max_client_lag_ms": 0.871049240231514,
+      "duration_s": 27.343641753774136,
+      "compilation_during_measurement": false
+    },
+    {
+      "experiment": "injection-3072-seed0",
+      "policy": "fixed",
+      "requests": 3,
+      "tokens": 1088,
+      "max_client_lag_ms": 1.8478147685527802,
+      "duration_s": 27.628910949919373,
+      "compilation_during_measurement": false
+    },
+    {
+      "experiment": "injection-3072-seed1",
+      "policy": "none",
+      "requests": 3,
+      "tokens": 1088,
+      "max_client_lag_ms": 0.8680187165737152,
+      "duration_s": 27.721117455046624,
+      "compilation_during_measurement": false
+    },
+    {
+      "experiment": "injection-3072-seed1",
+      "policy": "fixed",
+      "requests": 3,
+      "tokens": 1088,
+      "max_client_lag_ms": 0.828190241008997,
+      "duration_s": 23.706069248262793,
+      "compilation_during_measurement": false
+    },
+    {
+      "experiment": "injection-3072-seed2",
+      "policy": "none",
+      "requests": 3,
+      "tokens": 1088,
+      "max_client_lag_ms": 0.5156360566616058,
+      "duration_s": 27.702668002340943,
+      "compilation_during_measurement": false
+    },
+    {
+      "experiment": "injection-3072-seed2",
+      "policy": "fixed",
+      "requests": 3,
+      "tokens": 1088,
+      "max_client_lag_ms": 1.021300908178091,
+      "duration_s": 27.761341297999024,
+      "compilation_during_measurement": false
+    }
+  ],
+  "paired_requests": 27,
+  "identical_output_tokens": 9792,
+  "paired_traces": 9
+}

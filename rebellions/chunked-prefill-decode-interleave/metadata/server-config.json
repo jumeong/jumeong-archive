@@ -1,0 +1,31 @@
+{
+  "description": "Original experiment command and common environment; paths reflect the original host.",
+  "command": [
+    "/home/juwon/rbln-env/bin/python",
+    "-m",
+    "vllm.entrypoints.openai.api_server",
+    "--model",
+    "/home/juwon/experiments/qwen3-4b-bf16-interleave/compiled-b4-s4096",
+    "--served-model-name",
+    "experiment",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8124",
+    "--max-model-len",
+    "4096",
+    "--max-num-seqs",
+    "4",
+    "--no-enable-prefix-caching",
+    "--disable-log-requests"
+  ],
+  "common_environment": {
+    "PYTHONPATH": "/home/juwon/git/hello-npu-vllm-rbln",
+    "VLLM_RBLN_USE_VLLM_MODEL": "0",
+    "VLLM_RBLN_INTERLEAVE_K": "1"
+  },
+  "policies": [
+    "none",
+    "fixed"
+  ]
+}
