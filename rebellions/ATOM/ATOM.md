@@ -84,18 +84,22 @@ ISSCC 논문의 확대도는 엔진 하나의 Tensor Processor를 FP16 4 TFLOPS,
 
 ISSCC 논문은 저장소에 포함된 PDF의 12–13쪽에서 볼 수 있다. [ISSCC Digest 원본](https://iccircle.com/static/upload/img20240529101639.pdf#page=12)
 
-[white6]: https://rebellions.ai/wp-content/uploads/2024/07/ATOMgenAI_white-paper.pdf#page=6
-[white7]: https://rebellions.ai/wp-content/uploads/2024/07/ATOMgenAI_white-paper.pdf#page=7
-[white8]: https://rebellions.ai/wp-content/uploads/2024/07/ATOMgenAI_white-paper.pdf#page=8
-[white9]: https://rebellions.ai/wp-content/uploads/2024/07/ATOMgenAI_white-paper.pdf#page=9
-[oldcard]: https://rebellions.ai/wp-content/uploads/2024/07/ATOMgenAI_white-paper.pdf#page=5
+[ATOMgenAI_white-paper.pdf 원본](https://rebellions.ai/wp-content/uploads/2024/07/ATOMgenAI_white-paper.pdf)
+
+[White-Paper_Issue5_ATOM-Max_v1.0.pdf 원본](https://rebellions.ai/wp-content/uploads/2025/04/White-Paper_Issue5_ATOM-Max_v1.0.pdf)
+
+[white6]: ./ATOMgenAI_white-paper.pdf#page=6
+[white7]: ./ATOMgenAI_white-paper.pdf#page=7
+[white8]: ./ATOMgenAI_white-paper.pdf#page=8
+[white9]: ./ATOMgenAI_white-paper.pdf#page=9
+[oldcard]: ./ATOMgenAI_white-paper.pdf#page=5
 [img1]: https://rebellions.ai/wp-content/uploads/2024/07/Kr_jp_en_atom_genai_architecture_sweet_spot-3-1024x411.png
 [img2]: https://rebellions.ai/wp-content/uploads/2024/07/Kr_jp_en_atom_genai_architecture_sweet_spot-4.png
 [img3]: https://rebellions.ai/wp-content/uploads/2024/07/Kr_jp_en_atom_genai_architecture_sweet_spot-5-1024x355.png
 [img4]: https://rebellions.ai/wp-content/uploads/2024/07/Kr_jp_en_atom_genai_architecture_sweet_spot-6.png
 [plus]: https://rebellions.ai/rebellions-product/rbln-ca22/
 [max]: https://rebellions.ai/rebellions-product/atom-max/
-[maxpaper]: https://rebellions.ai/wp-content/uploads/2025/04/White-Paper_Issue5_ATOM-Max_v1.0.pdf#page=3
+[maxpaper]: ./White-Paper_Issue5_ATOM-Max_v1.0.pdf#page=3
 [rsd]: https://docs.rbln.ai/latest/software/optimum/index.html
 [isscc]: ./isscc2024.pdf#page=12
 [issccfig]: ./isscc2024.pdf#page=13
