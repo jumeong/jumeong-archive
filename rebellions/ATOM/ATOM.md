@@ -82,6 +82,8 @@ ISSCC 논문의 확대도는 엔진 하나의 Tensor Processor를 FP16 4 TFLOPS,
 
 **RISC-V 탑재 여부는 미확인이다.** ISSCC 논문은 Neural Engine 내부에 분산된 *RISC-type* 처리 코어를 기술하고, Rebellions는 이 엔진용 프로그램이 자체 **Rebellions RISC ISA**를 대상으로 생성된다고 설명한다. 두 자료에서 확인되는 것은 엔진의 명령어 설계 방식이다. 어느 쪽도 ATOM에 RISC-V ISA를 구현한 CPU가 있다고 명시하지 않는다. 호스트에서 PyTorch와 드라이버를 실행하는 서버 CPU는 Figure 1의 PCIe 바깥에 있다. [ISSCC §2.4][isscc] · [Rebellions 컴파일러 설명][compiler] · [백서 그림 1][white6]
 
+ISSCC 논문은 저장소에 포함된 PDF의 12–13쪽에서 볼 수 있다. [ISSCC Digest 원본](https://iccircle.com/static/upload/img20240529101639.pdf#page=12)
+
 [white6]: https://rebellions.ai/wp-content/uploads/2024/07/ATOMgenAI_white-paper.pdf#page=6
 [white7]: https://rebellions.ai/wp-content/uploads/2024/07/ATOMgenAI_white-paper.pdf#page=7
 [white8]: https://rebellions.ai/wp-content/uploads/2024/07/ATOMgenAI_white-paper.pdf#page=8
@@ -95,8 +97,8 @@ ISSCC 논문의 확대도는 엔진 하나의 Tensor Processor를 FP16 4 TFLOPS,
 [max]: https://rebellions.ai/rebellions-product/atom-max/
 [maxpaper]: https://rebellions.ai/wp-content/uploads/2025/04/White-Paper_Issue5_ATOM-Max_v1.0.pdf#page=3
 [rsd]: https://docs.rbln.ai/latest/software/optimum/index.html
-[isscc]: https://iccircle.com/static/upload/img20240529101639.pdf#page=12
-[issccfig]: https://iccircle.com/static/upload/img20240529101639.pdf#page=13
+[isscc]: ./isscc2024.pdf#page=12
+[issccfig]: ./isscc2024.pdf#page=13
 [profiler]: https://docs.rbln.ai/v0.12.0/software/profiler/architecture.html
 [patpdf]: https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/20250251973
 [pat]: https://patents.google.com/patent/US20250251973A1/en
