@@ -74,7 +74,7 @@ ISSCC 논문의 확대도는 엔진 하나의 Tensor Processor를 FP16 4 TFLOPS,
 
 **Task Manager는 각 Neural Engine 안에 있는 하드웨어 블록이다.** ISSCC의 실제 칩 블록도에는 작업 큐, 우선순위 제어, 의존성 제어가 표시된다. 백서 그림 5-2에서는 TM들이 엔진 가까이에서 의존성을 해결하면서, 한 엔진이 현재 타일을 계산하는 동안 다른 DMA 작업이 진행된다. 이렇게 하면 각 단계마다 CP까지 완료를 보고하고 다시 지시를 받는 왕복을 줄일 수 있다. [ISSCC 그림 2.4.1][issccfig] · [백서 그림 5-1·5-2, 9쪽][white9]
 
-공개특허 US20250251973A1은 이를 구현할 수 있는 예를 더 자세히 설명한다. TM의 회로는 대기 큐에서 작업 기술자(task descriptor)를 꺼내 의존성 행렬을 조회한다. 선행 작업이 완료되면 완료 신호로 행렬을 갱신하고, 조건을 만족한 작업을 후속 큐에 넘긴다. 특허 그림 8의 실시예에서는 L0 메모리와 연산·로드/스토어 블록 사이에 전용 동기화 경로를 둔다. 이 큐와 행렬의 구체적인 설계는 특허의 실시예이며, 양산 ATOM에서 직접 확인되는 범위는 위 ISSCC 블록도까지다. [특허 원문 PDF][patpdf] · [동일 공개번호의 명세서·청구항 1][pat]
+공개특허 US20250251973A1은 이를 구현할 수 있는 예를 더 자세히 설명한다. TM의 회로는 대기 큐에서 작업 기술자(task descriptor)를 꺼내 의존성 행렬을 조회한다. 선행 작업이 완료되면 완료 신호로 행렬을 갱신하고, 조건을 만족한 작업을 후속 큐에 넘긴다. 특허 그림 8의 실시예에서는 L0 메모리와 연산·로드/스토어 블록 사이에 전용 동기화 경로를 둔다. 이 큐와 행렬의 구체적인 설계는 특허의 실시예이며, 양산 ATOM에서 직접 확인되는 범위는 위 ISSCC 블록도까지다. [특허 원문 PDF][patpdf] · [USPTO 원본][pat-uspto] · [동일 공개번호의 명세서·청구항 1][pat]
 
 ## ATOM 칩 안에 Arm이나 RISC-V CPU가 있는가?
 
@@ -104,7 +104,8 @@ ISSCC 논문은 저장소에 포함된 PDF의 12–13쪽에서 볼 수 있다. [
 [isscc]: ./isscc2024.pdf#page=12
 [issccfig]: ./isscc2024.pdf#page=13
 [profiler]: https://docs.rbln.ai/v0.12.0/software/profiler/architecture.html
-[patpdf]: https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/20250251973
+[patpdf]: ./US20250251973A1.pdf
+[pat-uspto]: https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/20250251973
 [pat]: https://patents.google.com/patent/US20250251973A1/en
 [firmware]: https://rebellions.ai/developers/
 [flash]: https://docs.rbln.ai/v0.12.0/software/system_management/management_tools/rbln_flash.html
